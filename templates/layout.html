@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Netrun Systems - Cross-Tenant Governance Solutions{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin>
+    <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+    <style>
+        .navbar-brand {
+            background: none !important;
+            padding: 0;
+            border-radius: 0;
+        }
+        .responsive-banner {
+            width: 60vw;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        @media (max-width: 991px) {
+            .responsive-banner {
+                width: 90vw;
+            }
+        }
+        .nt-blue, .section-title, h1, h2, h3, h4, h5, h6 {
+            color: #1A4CA0 !important;
+        }
+        .navbar-nav .nav-link, .dropdown-menu .dropdown-item {
+            color: #1A4CA0 !important;
+            font-weight: bold;
+            letter-spacing: 0.01em;
+            word-spacing: 0.1em;
+        }
+        .navbar-nav .nav-link.blue-arrow:after, .dropdown-menu .dropdown-item.blue-arrow:after {
+            color: #1A4CA0;
+        }
+        .footer-info, .footer-links, .footer-newsletter {
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        .footer-newsletter {
+            padding: 0;
+        }
+        a, .dropdown-menu .dropdown-item {
+            color: #000 !important;
+            text-decoration: none;
+            position: relative;
+        }
+        .futura-bold {
+            font-family: 'Futura PT', 'Futura', Arial, sans-serif;
+            font-weight: bold;
+            color: #1A4CA0;
+            font-size: 1.1em;
+            margin-left: 0.25em;
+            letter-spacing: 0.01em;
+        }
+        .footer-contact a, .footer-links a {
+            color: #000 !important;
+        }
+        .footer-contact a:after, .footer-links a:after {
+            content: '\2192';
+            color: #1A4CA0;
+            margin-left: 0.3em;
+            font-size: 1em;
+            vertical-align: middle;
+        }
+        .footer-info, .footer-links, .footer-newsletter {
+            background: none !important;
+            box-shadow: none !important;
+        }
+        .footer-newsletter form {
+            background: none !important;
+        }
+        .footer-newsletter input, .footer-newsletter button {
+            background: #fff;
+        }
+        .footer-bottom {
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        .navbar {
+            border-bottom: none !important;
+        }
+        .dropdown-menu {
+            margin-top: 0;
+        }
+        .tight-header {
+            letter-spacing: 0.01em;
+            word-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background:#000 !important; border-bottom:none;">
+            <div class="container" style="background:none;">
+                <div class="navbar-brand d-flex flex-row align-items-start justify-content-between" style="background:none; gap: 0; width:100%; position:relative;">
+                    <img src="{{ url_for('static', filename='images/NS_BANNER_01_FLAT_2nd.png') }}" alt="Netrun Systems Banner" class="responsive-banner">
+                </div>
+                <!-- Dropdown menu extending from logo -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Products
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                        <a class="dropdown-item" href="/product/nexus-core">I<strong>N</strong>TIRKON Core Platform</a><span class="futura-bold">&gt;</span>
+                        <a class="dropdown-item" href="/product/cost-optimizer">Cost Optimizer</a><span class="futura-bold">&gt;</span>
+                        <a class="dropdown-item" href="/product/compliance-reporter">Compliance Reporter</a><span class="futura-bold">&gt;</span>
+                        <a class="dropdown-item" href="/product/governance-dashboard">Governance Dashboard</a><span class="futura-bold">&gt;</span>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/early-access">Early Access Signup</a><span class="futura-bold">&gt;</span>
+                      </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('blog') }}">Blog</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('research_projects') }}">Research</a></li>
+                  </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- If dropdown cannot extend from logo, add a separate nav bar here -->
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-info">
+                        <h3 class="nt-blue">Netrun Systems</h3>
+                        <p>Innovative cross-tenant governance solutions for Azure consultants and MSPs.</p>
+                        <div class="footer-contact">
+                            <p><i class="fas fa-map-marker-alt"></i> Ojai, CA</p>
+                            <p><i class="fas fa-phone"></i> <a href="tel:8057074828">805-707-4828</a></p>
+                            <p><i class="fas fa-envelope"></i> <a href="mailto:info@netrunsystems.com">info@netrunsystems.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="footer-links">
+                        <h4 class="nt-blue">Products</h4>
+                        <ul>
+                            <li><a class="blue-arrow" href="{{ url_for('product_nexus_core') }}">I<strong>N</strong>TIRKON Core</a></li>
+                            <li><a class="blue-arrow" href="{{ url_for('product_cost_optimizer') }}">Cost Optimizer</a></li>
+                            <li><a class="blue-arrow" href="{{ url_for('product_compliance_reporter') }}">Compliance Reporter</a></li>
+                            <li><a class="blue-arrow" href="{{ url_for('product_governance_dashboard') }}">Governance Dashboard</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="footer-links">
+                        <h4 class="nt-blue">Company</h4>
+                        <ul>
+                            <li><a class="blue-arrow" href="{{ url_for('index') }}">Home</a></li>
+                            <li><a class="blue-arrow" href="{{ url_for('blog') }}">Blog</a></li>
+                            <li><a class="blue-arrow" href="{{ url_for('early_access') }}">Early Access</a></li>
+                            <li><a class="blue-arrow" href="{{ url_for('contact') }}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="footer-newsletter">
+                        <h4 class="nt-blue">Stay Updated</h4>
+                        <p>Subscribe to our newsletter for the latest updates and insights.</p>
+                        <form action="#" method="post">
+                            <input type="email" name="email" placeholder="Your Email">
+                            <button type="submit" class="btn btn-brand">Subscribe</button>
+                        </form>
+                        <div class="social-links">
+                            <a class="blue-arrow" href="#"><i class="fab fa-linkedin"></i></a>
+                            <a class="blue-arrow" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="blue-arrow" href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="copyright">
+                    &copy; {{ now.year }} <strong>Netrun Systems</strong>. All Rights Reserved.
+                </div>
+                <div class="footer-legal">
+                    <a class="blue-arrow" href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+                    <a class="blue-arrow" href="{{ url_for('terms_of_service') }}">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
